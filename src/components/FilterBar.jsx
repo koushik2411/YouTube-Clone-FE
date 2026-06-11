@@ -1,15 +1,19 @@
 import React from 'react'
 
-function FilterBar() {
+function FilterBar({ selectedCategory, setSelectedCategory}) {
 
-  const filters = ["All","Newest", "Oldest", "Popular", "Most viewed"];
+  const filters = ["All","Popular", "React", "Node", "Fun", "Casual"];
   
   return (
-    <div>
+    <div className=' mx-2 p-1 px-1.5 flex gap-4 bg-gray-200 rounded-lg overflow-auto'>
 
-      {filters.map((item) => (
-        <button key={item}>
-          {item}
+      {filters.map((filter) => (
+        <button
+          key={filter}
+          onClick={()=> setSelectedCategory(filter)}
+          className={selectedCategory === filter ? "active-filter" : ""}
+        >
+          {filter}
         </button>
       ))}
       

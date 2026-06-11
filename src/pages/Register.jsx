@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { GiArchiveRegister } from "react-icons/gi";
 
 function Register() {
 
@@ -32,18 +33,20 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className=' h-screen w-full flex flex-col justify-center items-center gap-8'>
 
-      <form>
+      <form className=' max-w-200 flex flex-col gap-5'>
 
-        <h2></h2>
+        <h2 className=' flex items-center justify-center text-8xl text-slate-800'><GiArchiveRegister /></h2>
+
+        <h2 className=' mb-5 text-center font-bold border-b-2 text-xl text-slate-800'>REGISTER</h2>
 
         <input 
           type='text'
           name='username'
           placeholder='Username'
           onChange={handleChange}
-          className=''
+          className=' border w-[50vw] px-2 py-1 rounded-lg outline-0'
         />
 
         <input 
@@ -51,7 +54,7 @@ function Register() {
           name='email'
           placeholder='Email'
           onChange={handleChange}
-          className=''
+          className=' border w-[50vw] px-2 py-1 rounded-lg outline-0'
         />
 
         <input 
@@ -59,14 +62,16 @@ function Register() {
           name='password'
           placeholder='Password'
           onChange={handleChange}
-          className=''
+          className=' border w-[50vw] px-2 py-1 rounded-lg outline-0'
         />
 
-        <button>
+        <button type='submit' className=' px-2 py-1 border rounded-lg'>
           Register
         </button>
 
       </form>
+
+      <p>Already registered? <Link to="/login" className=' p-0.5 text-blue-500 border-b font-semibold'>Login</Link></p>
 
     </div>
   )

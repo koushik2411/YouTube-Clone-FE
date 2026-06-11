@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import VideoPlayer from './pages/VideoPlayer'
 import Channel from './pages/Channel'
 import CreateChannel from './pages/CreateChannel'
+import ProtectedRoute from './components/ProtectedRoutes'
 
 function App() {
   return (
@@ -19,9 +20,17 @@ function App() {
 
         <Route path='/watch/:id' element={<VideoPlayer/>}/>
 
-        <Route path='/channel/:id' element={<Channel/>}/>
+        <Route path='/channel/:id' element={
+          <ProtectedRoute>
+            <Channel/>
+          </ProtectedRoute>
+        }/>
 
-        <Route path='/create-channel' element={<CreateChannel/>}/>
+        <Route path='/create-channel' element={
+          <ProtectedRoute>
+            <CreateChannel/>
+          </ProtectedRoute>
+        }/>
 
       </Routes>
     </BrowserRouter>

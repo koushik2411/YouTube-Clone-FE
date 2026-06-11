@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaBars } from "react-icons/fa";
+import { AuthContext } from '../context/AuthContext';
 
 function Header({ search, setSearch, toggleSidebar }) {
+
+    const { user } = useContext(AuthContext);
 
   return (
     <header className=' p-3 flex items-center justify-between'>
@@ -30,11 +33,15 @@ function Header({ search, setSearch, toggleSidebar }) {
 
         <div className='right'>
 
-            <Link to="/login">
-                <button>
-                    Sign In
-                </button>
-            </Link>
+            {user ? (
+                <h2>{user.username}</h2>
+            ) : (
+                <Link to="/login">
+                    <button>
+                        Sign In
+                    </button>
+                </Link>
+            )}
         </div>
 
     </header>

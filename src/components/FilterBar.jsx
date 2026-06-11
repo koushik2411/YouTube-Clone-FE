@@ -2,7 +2,7 @@ import React from 'react'
 
 function FilterBar() {
 
-  const filters = ["Newest", "Oldest", "Popular", "Most viewed"];
+  const filters = ["All","Newest", "Oldest", "Popular", "Most viewed"];
   
   return (
     <div>

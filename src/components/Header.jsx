@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaBars } from "react-icons/fa";
 
-function Header() {
+function Header({ search, setSearch, toggleSidebar }) {
+
   return (
     <header className=' p-3 flex items-center justify-between'>
 
@@ -14,11 +15,14 @@ function Header() {
             </h1>
         </div>
 
+        {/* Search Bar */}
         <div className='middle'>
 
             <input 
                 type='text'
                 placeholder='Search'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className=''
             />
 

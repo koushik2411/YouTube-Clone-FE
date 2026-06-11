@@ -9,10 +9,25 @@ import videos from '../data/videos';
 function Home() {
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Filtered videos as per search and category
+  const filteredVideos = videos.filter((video) => {
+    const matchesSearch = video.title.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory = selectedCategory === "All" ? true : video.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  })
 
   return (
     <>
-      <Header toggleSidebar ={() => setSidebarOpen(!sidebarOpen)}/>
+      <Header 
+        search={search}
+        setSearch={setSearch}
+        toggleSidebar ={() => setSidebarOpen(!sidebarOpen)}
+      />
 
       <div className=''>
 
@@ -20,11 +35,14 @@ function Home() {
 
         <div className=''>
 
-          <FilterBar/>
+          <FilterBar
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
 
           <div className=' p-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
 
-            {videos.map((video) => (
+            {filteredVideos.map((video) => (
               <VideoCard
                 key={video.id}
                 video={video}

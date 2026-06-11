@@ -14,7 +14,7 @@ function VideoCard({ video }) {
         <img
           src={video.thumbnailUrl}
           alt={video.title}
-          className=' w-[35%] md:w-full rounded-lg'
+          className=' w-[40%] md:w-full rounded-lg'
         />
 
         <div className=' flex flex-col gap-1'>

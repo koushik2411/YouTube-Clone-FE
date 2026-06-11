@@ -100,6 +100,7 @@ function Channel() {
       ))}
 
       <form onSubmit={createVideo}>
+
         <input 
         name="title" 
         placeholder="Title" 
@@ -131,6 +132,7 @@ function Channel() {
         />
 
         <button type="submit">Upload Video</button>
+        
       </form>
 
     </div>

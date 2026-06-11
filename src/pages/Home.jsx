@@ -1,16 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import FilterBar from '../components/FilterBar';
 import VideoCard from '../components/VideoCard';
 
 import videos from '../data/videos';
+import api from '../services/api';
 
 function Home() {
 
+  const [videos, setVideos] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Fetch videos
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    const res = await api.get("/videos");
+
+    setVideos(res.data);
+  };
 
   // Filtered videos as per search and category
   const filteredVideos = videos.filter((video) => {
@@ -44,7 +57,7 @@ function Home() {
 
             {filteredVideos.map((video) => (
               <VideoCard
-                key={video.id}
+                key={video._id}
                 video={video}
               />
             ))}

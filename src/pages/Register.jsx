@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { GiArchiveRegister } from "react-icons/gi";
 
+import api from "../services/api";
+
 function Register() {
 
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ function Register() {
   return (
     <div className=' h-screen w-full flex flex-col justify-center items-center gap-8'>
 
-      <form className=' max-w-200 flex flex-col gap-5'>
+      <form onSubmit={handleSubmit} className=' max-w-200 flex flex-col gap-5'>
 
         <h2 className=' flex items-center justify-center text-8xl text-slate-800'><GiArchiveRegister /></h2>
 

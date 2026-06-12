@@ -20,7 +20,7 @@ function App() {
 
         <Route path='/watch/:id' element={<VideoPlayer/>}/>
 
-        <Route path='/channel/:id' element={
+        <Route path='/channel' element={
           <ProtectedRoute>
             <Channel/>
           </ProtectedRoute>

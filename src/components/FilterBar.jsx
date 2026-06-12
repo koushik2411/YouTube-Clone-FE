@@ -2,10 +2,10 @@ import React from 'react'
 
 function FilterBar({ selectedCategory, setSelectedCategory}) {
 
-  const filters = ["All","Popular", "React", "Node", "Fun", "Casual"];
+  const filters = ["All", "JavaScript", "MERN", "React", "Node", "MongoDB", "Express", "Frontend"];
   
   return (
-    <div className=' mx-2 p-1 px-1.5 flex gap-4 justify-evenly bg-gray-200 rounded-lg overflow-auto'>
+    <div className=' max-w-svw mx-2 p-1 px-1.5 flex gap-4 justify-evenly bg-gray-200 rounded-lg overflow-scroll '>
 
       {filters.map((filter) => (
         <button

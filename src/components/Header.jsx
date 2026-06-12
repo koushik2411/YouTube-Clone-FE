@@ -8,7 +8,7 @@ function Header({ toggleSidebar, search, setSearch }) {
     const { user } = useContext(AuthContext);
 
   return (
-    <header className=' p-3 flex items-center justify-between sticky top-0 left-0 z-50 border-b border-slate-300 bg-slate-50'>
+    <header className=' w-full p-3 flex items-center justify-between sticky top-0 left-0 z-50 border-b border-slate-300 bg-slate-50'>
 
         <div className='left flex items-center gap-5' onClick={() => {
             toggleSidebar();

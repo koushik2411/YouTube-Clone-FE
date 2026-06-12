@@ -9,7 +9,7 @@ function VideoPlayer() {
   // Video
   const [video, setVideo] = useState(null);
   const [comment, setComment] = useState("");
-  const [comments, setComments] = [];
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetchVideo();
@@ -33,7 +33,7 @@ function VideoPlayer() {
       const token = localStorage.getItem("token");
 
       await api.put(
-        `/videos/like/$id`,
+        `/videos/like/${id}`,
         {},
         {
           headers: {

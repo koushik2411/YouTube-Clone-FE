@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { FaEye } from "react-icons/fa";
 import Layout from "../components/Layout";
+import { Link } from "react-router-dom";
 
 function Channel() {
   const [videos, setVideos] = useState([]);
@@ -74,10 +75,10 @@ function Channel() {
   };
 
   // Delete video
-  const deleteVideo = async (id) => {
+  const deleteVideo = async (_id) => {
     const token = localStorage.getItem("token");
 
-    await api.delete(`/videos/${id}`, {
+    await api.delete(`/videos/${_id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -116,7 +117,7 @@ function Channel() {
             <img
               src={channel.channelBanner}
               alt={channel.channelName}
-              className=" rounded-lg"
+              className=" rounded-lg lg:w-full lg:h-100 lg:object-cover"
             />
 
             <div className=" flex flex-col">
@@ -193,29 +194,35 @@ function Channel() {
             )}
 
             {videos.map((video) => (
-              <div key={video.id} className=" border p-1 flex md:flex-col gap-5 md:gap-3 overflow-hidden hover:scale-[1.02] rounded-lg">
+              
+                <div
+                  key={video._id}
+                  className=" w-full h-full p-1 flex md:flex-col gap-1 md:gap-3 overflow-hidden hover:scale-[1.02] rounded-lg border border-slate-300"
+                >
+                  <img src={video.thumbnailUrl} className=" w-[40%] md:w-full rounded-lg" />
 
-                <img src={video.thumbnailUrl} className=" rounded-lg" />
+                  <div className=" p-3 flex flex-col">
+                    <Link to={`/watch/${video._id}`}>
+                      <h2 className=" font-semibold">{video.title}</h2>
+                    </Link> 
 
-                <div>
-                  <h2>{video.title}</h2>
+                    <h3 className=" font-semibold text-sm text-slate-700">{video.category}</h3>
 
-                  <h3>{video.category}</h3>
+                    <h3 className=" flex gap-2 items-center font-semibold text-sm text-slate-700">
+                      {" "}
+                      <FaEye /> {video.views} views
+                    </h3>
 
-                  <h3 className=" flex gap-2">
-                    {" "}
-                    <FaEye /> {video.views} views
-                  </h3>
+                    <div className=" my-3 flex justify-end  items-center gap-3">
+                      <button onClick={() => editVideo(video.id)} className=" py-0.5 px-2 border border-slate-300 rounded-lg hover:bg-amber-500 hover:text-white ">Edit</button>
 
-                  <div className=" flex justify-between items-center gap-3">
-                    <button onClick={() => editVideo(video.id)}>Edit</button>
-
-                    <button onClick={() => deleteVideo(video.id)}>
-                      Delete
-                    </button>
+                      <button onClick={() => deleteVideo(video._id)} className=" py-0.5 px-2 border border-slate-300 rounded-lg hover:bg-red-500 hover:text-white ">
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+
             ))}
           </div>
         </div>

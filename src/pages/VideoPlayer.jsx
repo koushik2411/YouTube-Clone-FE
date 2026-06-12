@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import api from '../services/api'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../services/api";
+import Layout from "../components/Layout";
 
 function VideoPlayer() {
-
-  const {id} = useParams();
+  const { id } = useParams();
 
   // Video
   const [video, setVideo] = useState(null);
   const [comment, setComment] = useState("");
-  const [comments, setComments] = ([]);
+  const [comments, setComments] = [];
 
   useEffect(() => {
     fetchVideo();
@@ -39,7 +39,7 @@ function VideoPlayer() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       fetchVideo();
@@ -60,7 +60,7 @@ function VideoPlayer() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       fetchVideo();
@@ -99,7 +99,7 @@ function VideoPlayer() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       setComment("");
@@ -113,72 +113,56 @@ function VideoPlayer() {
   if (!video) return <h2>Loading Video...</h2>;
 
   return (
-    <div>
-
-      <iframe
-        src={video.videoUrl}
-        title={video.title}
-        className=' w-full'
-      />
-
-      <h2>{video.title}</h2>
-
-      <p>{video.description}</p>
-
-      <h4>{video.channel?.channelName}</h4>
-
-      {/* REACTION BUTTONS */}
+    <Layout>
       <div>
+        <iframe src={video.videoUrl} title={video.title} className=" w-full" />
 
-        <button onClick={likeVideo}>
-          Like {video.likes.length}
-        </button>
+        <h2>{video.title}</h2>
 
-        <button onClick={dislikeVideo}>
-          Dislike {video.dislikes.length}
-        </button>
+        <p>{video.description}</p>
 
-        <button>
-          Share
-        </button>
+        <h4>{video.channel?.channelName}</h4>
 
-        <button>
-          Download
-        </button>
+        {/* REACTION BUTTONS */}
+        <div>
+          <button onClick={likeVideo}>Like {video.likes.length}</button>
 
-        <button>
-          Save
-        </button>
+          <button onClick={dislikeVideo}>
+            Dislike {video.dislikes.length}
+          </button>
 
+          <button>Share</button>
+
+          <button>Download</button>
+
+          <button>Save</button>
+        </div>
+
+        {/* COMMENT FORM */}
+        <div>
+          <input
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Write comment"
+          />
+
+          <button onClick={addComment}>Comment</button>
+        </div>
+
+        {/* COMMENTS */}
+        <div>
+          {comments.map((item) => (
+            <div>
+              <strong>{item.user.username}</strong>
+
+              <p>{item.text}</p>
+            </div>
+          ))}
+          ;
+        </div>
       </div>
-
-      {/* COMMENT FORM */}
-      <div>
-
-        <input
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder='Write comment'
-        />
-
-        <button onClick={addComment}>Comment</button>
-
-      </div>
-
-      {/* COMMENTS */}
-      <div>
-
-        {comments.map((item) => (
-          <div>
-            <strong>{item.user.username}</strong>
-
-            <p>{item.text}</p>
-          </div>
-        ))};
-      </div>
-
-    </div>
-  )
+    </Layout>
+  );
 }
 
-export default VideoPlayer
+export default VideoPlayer;

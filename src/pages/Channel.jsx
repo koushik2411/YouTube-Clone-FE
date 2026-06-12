@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { FaEye } from "react-icons/fa";
+import Layout from "../components/Layout";
 
 function Channel() {
   const [videos, setVideos] = useState([]);
@@ -15,14 +16,11 @@ function Channel() {
   const fetchChannel = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await api.get(
-      "/channel/my-channel",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await api.get("/channel/my-channel", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     setChannel(res.data);
   };
@@ -106,104 +104,83 @@ function Channel() {
   };
 
   return (
-    <div>
-      <h1>My Channel</h1>
+    <Layout>
+      <div>
+        <h1>My Channel</h1>
 
-      {/* Channel Header */}
-      {channel && (
+        {/* Channel Header */}
+        {channel && (
+          <div>
+            <img src={channel.channelBanner} alt="" className="" />
+
+            <h1>{channel.channelName}</h1>
+
+            <p>{channel.description}</p>
+          </div>
+        )}
+
+        {/* Videos */}
         <div>
+          <h2>My Videos</h2>
 
-          <img
-            src={channel.channelBanner}
-            alt=""
-            className=""
+          {videos.length === 0 && <h2>No videos uploaded yet</h2>}
+
+          {videos.map((video) => (
+            <div>
+              <img src={video.thumbnailUrl} className="" />
+
+              <div>
+                <h2>{video.title}</h2>
+
+                <h3>{video.category}</h3>
+
+                <h3 className=" flex gap-2">
+                  {" "}
+                  <FaEye /> {video.views} views
+                </h3>
+
+                <div className=" flex justify-between items-center gap-3">
+                  <button onClick={() => editVideo(video.id)}>Edit</button>
+
+                  <button onClick={() => deleteVideo(video.id)}>Delete</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Upload Form */}
+        <form onSubmit={createVideo}>
+          <input name="title" placeholder="Title" onChange={handleChange} />
+
+          <input
+            name="description"
+            placeholder="Description"
+            onChange={handleChange}
           />
 
-          <h1>
-            {channel.channelName}
-          </h1>
+          <input
+            name="thumbnailUrl"
+            placeholder="Thumbnail URL"
+            onChange={handleChange}
+          />
 
-          <p>
-            {channel.description}
-          </p>
+          <input
+            name="videoUrl"
+            placeholder="Video URL"
+            onChange={handleChange}
+          />
 
-        </div>
-      )}
+          <input
+            name="category"
+            placeholder="Category"
+            onChange={handleChange}
+          />
 
-      {/* Videos */}
-      <div>
-        <h2>My Videos</h2>
-
-        {
-          videos.length === 0 && (
-            <h2>No videos uploaded yet</h2>
-          )
-        }
-        
-        {videos.map((video) => (
-          <div>
-
-            <img
-              src={video.thumbnailUrl}
-              className=""
-            />
-
-            <div>
-              <h2>{video.title}</h2>
-
-              <h3>{video.category}</h3>
-
-              <h3 className=" flex gap-2"> <FaEye/> {video.views} views</h3>
-
-              <div className=" flex justify-between items-center gap-3">
-                <button onClick={() => editVideo(video.id)}>Edit</button>
-
-                <button onClick={() => deleteVideo(video.id)}>Delete</button>
-              </div>
-
-            </div>
-          </div>
-        ))}
+          <button type="submit">Upload Video</button>
+        </form>
       </div>
-
-      {/* Upload Form */}
-      <form onSubmit={createVideo}>
-
-        <input 
-        name="title" 
-        placeholder="Title" 
-        onChange={handleChange} 
-        />
-
-        <input
-          name="description"
-          placeholder="Description"
-          onChange={handleChange}
-        />
-
-        <input
-          name="thumbnailUrl"
-          placeholder="Thumbnail URL"
-          onChange={handleChange}
-        />
-
-        <input
-          name="videoUrl"
-          placeholder="Video URL"
-          onChange={handleChange}
-        />
-
-        <input 
-          name="category" 
-          placeholder="Category" 
-          onChange={handleChange} 
-        />
-
-        <button type="submit">Upload Video</button>
-        
-      </form>
-
-    </div>
+    </Layout>
   );
 }
 

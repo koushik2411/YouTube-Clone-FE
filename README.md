@@ -1,16 +1,57 @@
-# React + Vite
+# YouTube Clone - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern YouTube-like video streaming frontend built with **React.js**, **React Router**, **Axios**, and **Tailwind CSS**.  
+It connects to a Node.js + Express backend API for authentication, video upload, playback, comments, and channel management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Authentication
+- User Register & Login
+- JWT-based authentication
+- Persistent login using LocalStorage
+- Protected Routes
 
-## React Compiler
+### Video System
+- Home feed with all videos
+- Video player page
+- Like / Dislike system
+- View count support
+- Category filtering
+- Search functionality
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Comments System
+- Add comments on videos
+- View all comments
+- Edit / Delete comments (authorized users)
 
-## Expanding the ESLint configuration
+### Channel System
+- Create channel
+- View your channel dashboard
+- Upload videos to channel
+- Manage uploaded videos (edit/delete)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### UI/UX
+- Responsive layout (mobile + desktop)
+- Sidebar navigation with toggle
+- Header with search
+- Scrollable action buttons on video page
+- Clean YouTube-like layout
+
+## Tech Stack
+- React.js (Vite)
+- React Router DOM
+- Axios
+- Context API (Auth)
+- Tailwind CSS
+- React Icons
+
+## Setup Instructions
+1. Clone repository (git clone (https://github.com/koushik2411/YouTube-Clone-FE))
+2. Install Dependencies (npm install)
+3. Setup Environment variables (create .env file)
+4. Start development server (npm run dev)
+
+## Authentication Flow
+- Token stored in localStorage
+- Axios automatically sends JWT in headers
+- Protected routes redirect unauthorized users

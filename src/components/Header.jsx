@@ -17,7 +17,7 @@ function Header({ toggleSidebar, search, setSearch }) {
 
             <div className=' flex items-center gap-1.5'>
                 <img
-                  src='/Youtube_logo.png'
+                  src='https://res.cloudinary.com/dcfjexbss/image/upload/v1781286004/Youtube_logo_lnzo8b.png'
                   alt='logo'
                   className=' h-5.5'
                 />

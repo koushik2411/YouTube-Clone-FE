@@ -26,22 +26,22 @@ function Sidebar({ sidebarOpen }) {
       {/* Useful menu */}
       <div className=' pb-3 flex flex-col gap-1 border-b border-slate-400'>
 
-        <Link to="/" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'>
+        <Link to="/" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
           <FaHome/>
           {sidebarOpen && <span>Home</span>}
         </Link>
 
-        <Link to="/channel" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'>
+        <Link to="/channel" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
           <GrChannel />
           {sidebarOpen && <span>My Channel</span>}
         </Link>
 
-        <Link to="create-channel" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'>
+        <Link to="/create-channel" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
           <IoMdAddCircle />
           {sidebarOpen && <span>Create Channel</span>}
         </Link>
 
-        <Link to="/profile" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'>
+        <Link to="/profile" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
           <FaUserCircle />
           {sidebarOpen && <span>Profile</span>}
         </Link>
@@ -51,30 +51,30 @@ function Sidebar({ sidebarOpen }) {
       {/* Dummy menu options 1 */}
       <ul className=' pb-3 flex flex-col gap-1 border-b border-slate-400'>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <SiYoutubeshorts /> {sidebarOpen && <span>Shorts</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <SiYoutubeshorts /> {sidebarOpen && <span>Shorts</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <MdSubscriptions/> {sidebarOpen && <span>Subscriptions</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <MdSubscriptions/> {sidebarOpen && <span>Subscriptions</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <FaHistory/> {sidebarOpen && <span>History</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <FaHistory/> {sidebarOpen && <span>History</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <IoLibrary/> {sidebarOpen && <span>Library</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <IoLibrary/> {sidebarOpen && <span>Library</span>}</li>
 
       </ul>
 
       {/* Dummy menu options 1 */}
       <ul className=' pb-3 flex flex-col gap-1 border-b border-slate-400'>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <IoSettings/> {sidebarOpen && <span>Settings</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <IoSettings/> {sidebarOpen && <span>Settings</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <FaHeadset/> {sidebarOpen && <span>Help & Support</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <FaHeadset/> {sidebarOpen && <span>Help & Support</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <IoIosLock/> {sidebarOpen && <span>Privacy</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <IoIosLock/> {sidebarOpen && <span>Privacy</span>}</li>
 
-        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200'> <IoLanguage/> {sidebarOpen && <span>Languages</span>}</li>
+        <li className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'> <IoLanguage/> {sidebarOpen && <span>Languages</span>}</li>
 
       </ul>
 
-      <button onClick={handleLogout} className=' p-2 flex items-center gap-2 cursor-pointer text-red-600 hover:bg-slate-200'>
+      <button onClick={handleLogout} className=' p-2 flex items-center gap-2 cursor-pointer text-red-600 hover:bg-slate-200 rounded-lg'>
         <MdLogout/>
         {sidebarOpen && <span>Logout</span>}
       </button>

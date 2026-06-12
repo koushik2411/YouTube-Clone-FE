@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import api from "../services/api";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 
 function CreateChannel() {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     channelName: "",
     description: "",
@@ -31,7 +33,7 @@ function CreateChannel() {
 
       alert("Channel Created Successfully");
 
-      Navigate("/channel");
+      navigate("/channel");
     } catch (error) {
       alert(error.response?.data?.message || "Failed to create channel");
     }

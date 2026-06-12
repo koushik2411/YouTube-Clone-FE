@@ -14,15 +14,19 @@ function Channel() {
 
   // Fetch channel
   const fetchChannel = async () => {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    const res = await api.get("/channel/my-channel", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      const res = await api.get("/channel/my-channel", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    setChannel(res.data);
+      setChannel(res.data);
+    } catch (error) {
+      setChannel(null);
+    }
   };
 
   // Fetch videos
@@ -105,80 +109,116 @@ function Channel() {
 
   return (
     <Layout>
-      <div>
-        <h1>My Channel</h1>
-
+      <div className=" p-3 flex flex-col gap-5">
         {/* Channel Header */}
         {channel && (
-          <div>
-            <img src={channel.channelBanner} alt="" className="" />
+          <div className=" flex flex-col gap-3">
+            <img
+              src={channel.channelBanner}
+              alt={channel.channelName}
+              className=" rounded-lg"
+            />
 
-            <h1>{channel.channelName}</h1>
+            <div className=" flex flex-col">
+              <h1 className=" text-xl font-semibold">{channel.channelName}</h1>
 
-            <p>{channel.description}</p>
+              <p>{channel.description}</p>
+            </div>
           </div>
         )}
 
-        {/* Videos */}
-        <div>
-          <h2>My Videos</h2>
+        {/* Upload Form */}
+        <div className=" flex flex-col gap-3">
+          <h2 className=" font-semibold border-b-2 border-red-600">
+            Upload New Video
+          </h2>
 
-          {videos.length === 0 && <h2>No videos uploaded yet</h2>}
+          <form
+            onSubmit={createVideo}
+            className=" w-[90%] max-w-180 flex flex-col gap-3 self-center"
+          >
+            <input
+              name="title"
+              placeholder="Title"
+              onChange={handleChange}
+              className=" py-0.5 px-2 rounded outline-0 border-2 border-slate-300"
+            />
 
-          {videos.map((video) => (
-            <div>
-              <img src={video.thumbnailUrl} className="" />
+            <input
+              name="description"
+              placeholder="Description"
+              onChange={handleChange}
+              className=" py-0.5 px-2 rounded outline-0 border-2 border-slate-300"
+            />
 
-              <div>
-                <h2>{video.title}</h2>
+            <input
+              name="thumbnailUrl"
+              placeholder="Thumbnail URL"
+              onChange={handleChange}
+              className=" py-0.5 px-2 rounded outline-0 border-2 border-slate-300"
+            />
 
-                <h3>{video.category}</h3>
+            <input
+              name="videoUrl"
+              placeholder="Video URL"
+              onChange={handleChange}
+              className=" py-0.5 px-2 rounded outline-0 border-2 border-slate-300"
+            />
 
-                <h3 className=" flex gap-2">
-                  {" "}
-                  <FaEye /> {video.views} views
-                </h3>
+            <input
+              name="category"
+              placeholder="Category"
+              onChange={handleChange}
+              className=" py-0.5 px-2 rounded outline-0 border-2 border-slate-300"
+            />
 
-                <div className=" flex justify-between items-center gap-3">
-                  <button onClick={() => editVideo(video.id)}>Edit</button>
-
-                  <button onClick={() => deleteVideo(video.id)}>Delete</button>
-                </div>
-              </div>
-            </div>
-          ))}
+            <button
+              type="submit"
+              className=" px-2 py-1 bg-linear-to-b from-red-500 to-red-600 text-white rounded-lg"
+            >
+              Upload Video
+            </button>
+          </form>
         </div>
 
-        {/* Upload Form */}
-        <form onSubmit={createVideo}>
-          <input name="title" placeholder="Title" onChange={handleChange} />
+        {/* Videos */}
+        <div>
+          <h2 className=" font-semibold border-b-2 border-red-600">
+            My Videos
+          </h2>
 
-          <input
-            name="description"
-            placeholder="Description"
-            onChange={handleChange}
-          />
+          <div className=" p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {videos.length === 0 && (
+              <h2 className=" mt-20 text-center">No videos uploaded yet</h2>
+            )}
 
-          <input
-            name="thumbnailUrl"
-            placeholder="Thumbnail URL"
-            onChange={handleChange}
-          />
+            {videos.map((video) => (
+              <div key={video.id} className=" border p-1 flex md:flex-col gap-5 md:gap-3 overflow-hidden hover:scale-[1.02] rounded-lg">
 
-          <input
-            name="videoUrl"
-            placeholder="Video URL"
-            onChange={handleChange}
-          />
+                <img src={video.thumbnailUrl} className=" rounded-lg" />
 
-          <input
-            name="category"
-            placeholder="Category"
-            onChange={handleChange}
-          />
+                <div>
+                  <h2>{video.title}</h2>
 
-          <button type="submit">Upload Video</button>
-        </form>
+                  <h3>{video.category}</h3>
+
+                  <h3 className=" flex gap-2">
+                    {" "}
+                    <FaEye /> {video.views} views
+                  </h3>
+
+                  <div className=" flex justify-between items-center gap-3">
+                    <button onClick={() => editVideo(video.id)}>Edit</button>
+
+                    <button onClick={() => deleteVideo(video.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Layout>
   );

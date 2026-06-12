@@ -41,22 +41,26 @@ function CreateChannel() {
 
   return (
     <Layout>
-      <div>
-        <div>
+      <div className=" h-[90vh] w-full flex justify-center items-center bg-red-50">
+
+        <div className=" h-[50%] w-[85%] p-5 bg-slate-50 flex flex-col gap-10 rounded-lg shadow-lg">
+
+        <h2 className=" text-xl font-semibold border-b-2 border-red-600">Create Channel</h2>
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="text"
               name="channelName"
               placeholder="Channel Name"
               onChange={handleChange}
-              className="border p-2 rounded"
+              className="border border-slate-400 p-2 rounded-lg outline-0"
             />
 
             <textarea
               name="description"
               placeholder="Description"
               onChange={handleChange}
-              className="border p-2 rounded"
+              className="border border-slate-400 p-2 rounded-lg outline-0"
             />
 
             <input
@@ -64,12 +68,12 @@ function CreateChannel() {
               name="channelBanner"
               placeholder="Banner URL"
               onChange={handleChange}
-              className="border p-2 rounded"
+              className="border border-slate-400 p-2 rounded-lg outline-0"
             />
 
             <button
               type="submit"
-              className="bg-blue-500 text-white p-2 rounded"
+              className="bg-linear-to-b from-red-500 to-red-600 text-white p-2 rounded-lg"
             >
               Create Channel
             </button>

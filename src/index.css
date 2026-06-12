@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+button:active {
+    scale: 0.96;
+}
+
 .active-filter{
     padding: 2px 8px;
     background: var(--color-slate-800);

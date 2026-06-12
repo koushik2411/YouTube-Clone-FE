@@ -4,13 +4,12 @@ import Sidebar from '../components/Sidebar';
 import FilterBar from '../components/FilterBar';
 import VideoCard from '../components/VideoCard';
 
-import videos from '../data/videos';
 import api from '../services/api';
 
 function Home() {
 
   const [videos, setVideos] = useState([]);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -34,26 +33,32 @@ function Home() {
     return matchesSearch && matchesCategory;
   })
 
+  // Sidebar toggle
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
-    <>
+    <div className=''>
+    
       <Header 
+        toggleSidebar ={toggleSidebar}
         search={search}
         setSearch={setSearch}
-        toggleSidebar ={() => setSidebarOpen(!sidebarOpen)}
       />
 
-      <div className=''>
+      <div className=' flex'>
 
-        {sidebarOpen && <Sidebar/>}
+        <Sidebar sidebarOpen={sidebarOpen}/>
 
-        <div className=''>
+        <div className=' mt-2 flex-1 bg-red-slate-50'>
 
           <FilterBar
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />
 
-          <div className=' p-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
+          <div className=' p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
 
             {filteredVideos.map((video) => (
               <VideoCard
@@ -67,7 +72,7 @@ function Home() {
         </div>
 
       </div>
-    </>
+    </div>
   )
 }
 

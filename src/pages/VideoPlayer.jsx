@@ -8,87 +8,109 @@ function VideoPlayer() {
 
   // Video
   const [video, setVideo] = useState(null);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = ([]);
 
   useEffect(() => {
     fetchVideo();
-  }, []);
+    fetchComments();
+  }, [id]);
 
+  // Fetch video
   const fetchVideo = async () => {
-    const res = await api.get(`/videos/${id}`);
+    try {
+      const res = await api.get(`/videos/${id}`);
 
-    setVideo(res.data);
+      setVideo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  if (!video) return <h2>Loading Video...</h2>;
 
   // Like
   const likeVideo = async () => {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    await api.put(
-      `/videos/like/$id`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      await api.put(
+        `/videos/like/$id`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    fetchVideo();
+      fetchVideo();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Dislike
   const dislikeVideo = async () => {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    await api.put(
-      `/videos/dislike/${id}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      await api.put(
+        `/videos/dislike/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    fetchVideo();
+      fetchVideo();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // Comments
-  const [comment, setComment] = useState("");
-
-  const [comments, setComments] = ([]);
-
-  // Fetch comments
+  // Fetch Comments
   const fetchComments = async () => {
-    const res = await api.get(`/comments/${id}`);
+    try {
+      const res = await api.get(`/comments/${id}`);
 
-    setComments(res.data);
+      setComments(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  useEffect(() => {
-    fetchVideo();
-    fetchComments();
-  }, []);
 
   // Add comment
   const addComment = async () => {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    await api.post(
-      `/comments/${id}`,
-      {text: comment},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      if (!token) {
+        alert("Please login first");
+        return;
       }
-    );
 
-    setComment("");
-    fetchComments();
+      await api.post(
+        `/comments/${id}`,
+        {
+          text: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setComment("");
+      fetchComments();
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  // Check for video
+  if (!video) return <h2>Loading Video...</h2>;
 
   return (
     <div>
@@ -96,6 +118,7 @@ function VideoPlayer() {
       <iframe
         src={video.videoUrl}
         title={video.title}
+        className=' w-full'
       />
 
       <h2>{video.title}</h2>

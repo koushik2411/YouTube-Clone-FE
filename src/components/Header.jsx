@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom'
 import { FaBars, FaUser } from "react-icons/fa";
 import { AuthContext } from '../context/AuthContext';
 
-function Header({ search, setSearch, toggleSidebar }) {
+function Header({ toggleSidebar, search, setSearch }) {
 
     const { user } = useContext(AuthContext);
 
   return (
-    <header className=' p-3 flex items-center justify-between'>
+    <header className=' p-3 flex items-center justify-between sticky top-0 left-0 z-50'>
 
-        <div className='left flex items-center gap-5'>
+        <div className='left flex items-center gap-5' onClick={() => {
+            toggleSidebar();
+        }}>
             <FaBars/>
 
             <div className=' flex items-center gap-1.5'>

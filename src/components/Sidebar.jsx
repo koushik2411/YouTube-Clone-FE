@@ -41,7 +41,7 @@ function Sidebar({ sidebarOpen }) {
           {sidebarOpen && <span>Create Channel</span>}
         </Link>
 
-        <Link to="/profile" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
+        <Link to="/" className=' p-2 flex items-center gap-2 cursor-pointer hover:bg-slate-200 rounded-lg'>
           <FaUserCircle />
           {sidebarOpen && <span>Profile</span>}
         </Link>

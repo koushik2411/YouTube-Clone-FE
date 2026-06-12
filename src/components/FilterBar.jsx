@@ -2,7 +2,7 @@ import React from 'react'
 
 function FilterBar({ selectedCategory, setSelectedCategory}) {
 
-  const filters = ["All", "JavaScript", "MERN", "React", "Node", "MongoDB", "Express", "Frontend"];
+  const filters = ["All", "JavaScript", "MERN", "React", "Nodejs", "MongoDB", "Express", "Frontend"];
   
   return (
     <div className=' max-w-svw mx-2 p-1 px-1.5 flex gap-4 justify-evenly bg-gray-200 rounded-lg overflow-scroll '>
